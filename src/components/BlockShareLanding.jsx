@@ -1,14 +1,13 @@
 import React, { useState, useCallback } from 'react'
-import { ethers } from 'ethers'
 import { Box, Users, Lock, Zap } from "lucide-react"
 
 const Button = React.memo(({ children, variant, ...props }) => (
   <button
-    className={`px-4 py-2 rounded-md transition-colors text-sm font-semibold ${
+    className={`px-4 py-2 rounded-md transition-all text-sm font-semibold text-white ${
       variant === 'outline'
-        ? 'border border-gray-300 hover:bg-gray-100 focus:ring-gray-300 text-gray-800 dark:text-gray-200'
-        : 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500'
-    }`}
+        ? 'border border-purple-300 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600'
+        : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700'
+    } focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`}
     {...props}
   >
     {children}
@@ -17,20 +16,20 @@ const Button = React.memo(({ children, variant, ...props }) => (
 
 const Input = React.memo(({ className, ...props }) => (
   <input
-    className={`px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-gray-800 dark:text-gray-200 ${className}`}
+    className={`px-3 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 text-gray-800 dark:text-gray-200 ${className}`}
     {...props}
   />
 ))
 
 const NavLink = React.memo(({ href, children }) => (
-  <a className="text-sm font-medium hover:text-blue-600 transition-colors" href={href}>
+  <a className="text-sm font-medium hover:text-purple-600 transition-colors" href={href}>
     {children}
   </a>
 ))
 
 const FeatureCard = React.memo(({ Icon, title, description }) => (
   <div className="flex flex-col items-center space-y-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md transition-transform hover:scale-105">
-    <Icon className="h-12 w-12 text-blue-600" aria-hidden="true" />
+    <Icon className="h-12 w-12 text-purple-500" aria-hidden="true" />
     <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{title}</h3>
     <p className="text-gray-600 dark:text-gray-300 text-center">{description}</p>
   </div>
@@ -38,22 +37,6 @@ const FeatureCard = React.memo(({ Icon, title, description }) => (
 
 export default function BlockShareLanding() {
   const [account, setAccount] = useState(null)
-
-  const connectWallet = useCallback(async () => {
-    if (window.ethereum) {
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-        setAccount(accounts[0])
-        console.log('Connected to MetaMask:', accounts[0])
-        
-        const provider = new ethers.providers.Web3Provider(window.ethereum)
-      } catch (error) {
-        console.error('Error connecting to MetaMask:', error)
-      }
-    } else {
-      alert('MetaMask not detected! Please install the MetaMask extension.')
-    }
-  }, [])
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault()
@@ -64,7 +47,7 @@ export default function BlockShareLanding() {
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <header className="px-4 lg:px-6 h-16 flex items-center bg-white dark:bg-gray-800 shadow-sm">
         <a className="flex items-center justify-center" href="#" aria-label="BlockShare Home">
-          <Box className="h-8 w-8 text-blue-600" aria-hidden="true" />
+          <Box className="h-8 w-8 text-purple-600" aria-hidden="true" />
           <span className="ml-2 text-2xl font-bold text-gray-900 dark:text-gray-100">BlockShare</span>
         </a>
         <nav className="ml-auto flex gap-6 sm:gap-8">
@@ -87,8 +70,8 @@ export default function BlockShareLanding() {
                 </p>
               </div>
               <div className="space-x-4 mt-6">
-                <Button onClick={connectWallet}>
-                  {account ? `Connected: ${account.slice(0, 6)}...${account.slice(-4)}` : 'Connect to MetaMask'}
+                <Button>
+                  Get Started
                 </Button>
               </div>
             </div>

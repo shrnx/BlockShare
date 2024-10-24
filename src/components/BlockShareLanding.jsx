@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Box, Users, Lock, Zap } from "lucide-react";
-import { useNavigate, Link } from 'react-router-dom'; // Import Link
+import { useNavigate, Link } from 'react-router-dom';
 
 const Button = React.memo(({ children, variant, ...props }) => (
   <button
@@ -22,7 +22,6 @@ const Input = React.memo(({ className, ...props }) => (
   />
 ));
 
-// Updated NavLink to use Link
 const NavLink = React.memo(({ to, children }) => (
   <Link to={to} className="text-sm font-medium hover:text-purple-600 transition-colors">
     {children}
@@ -31,7 +30,7 @@ const NavLink = React.memo(({ to, children }) => (
 
 const FeatureCard = React.memo(({ Icon, title, description }) => (
   <div className="flex flex-col items-center space-y-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md transition-transform hover:scale-105">
-    <Icon className="h-12 w-12 text-purple-500" aria-hidden="true" />
+    <Icon className="animate-bounce h-12 w-12 text-purple-500" aria-hidden="true" />
     <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{title}</h3>
     <p className="text-gray-600 dark:text-gray-300 text-center">{description}</p>
   </div>
@@ -42,7 +41,7 @@ export default function BlockShareLanding() {
   const navigate = useNavigate();
 
   const handleNavigateToDashboard = () => {
-    navigate('/dashboard'); // Navigate to the dashboard
+    navigate('/dashboard'); 
   };
 
   const handleSubmit = useCallback((e) => {
@@ -54,7 +53,7 @@ export default function BlockShareLanding() {
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <header className="px-4 lg:px-6 h-16 flex items-center bg-white dark:bg-gray-800 shadow-sm">
         <Link className="flex items-center justify-center" to="/" aria-label="BlockShare Home">
-          <Box className="h-8 w-8 text-purple-600" aria-hidden="true" />
+          <Box className="animate-spin h-8 w-8 text-purple-600" aria-hidden="true" />
           <span className="ml-2 text-2xl font-bold text-gray-900 dark:text-gray-100">BlockShare</span>
         </Link>
         <nav className="ml-auto flex gap-6 sm:gap-8 font-bold">
@@ -114,7 +113,7 @@ export default function BlockShareLanding() {
                 </p>
               </div>
               <div className="w-full max-w-sm space-y-2 mt-6">
-                <form className="flex space-x-2" onSubmit={handleSubmit}>
+                <form className="flex space-x-2 text-green-500" onSubmit={handleSubmit}>
                   <Input className="max-w-lg flex-1" placeholder="Enter your email" type="email" required aria-label="Email for newsletter" />
                   <Button type="submit">Subscribe</Button>
                 </form>

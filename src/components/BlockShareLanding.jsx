@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from 'react'
-import { Box, Users, Lock, Zap } from "lucide-react"
+import React, { useState, useCallback } from 'react';
+import { Box, Users, Lock, Zap } from "lucide-react";
+import { useNavigate, Link } from 'react-router-dom'; // Import Link
 
 const Button = React.memo(({ children, variant, ...props }) => (
   <button
@@ -12,20 +13,21 @@ const Button = React.memo(({ children, variant, ...props }) => (
   >
     {children}
   </button>
-))
+));
 
 const Input = React.memo(({ className, ...props }) => (
   <input
     className={`px-3 py-2 border border-gray-300 rounded-md focus:ring-purple-500 focus:border-purple-500 text-gray-800 dark:text-gray-200 ${className}`}
     {...props}
   />
-))
+));
 
-const NavLink = React.memo(({ href, children }) => (
-  <a className="text-sm font-medium hover:text-purple-600 transition-colors" href={href}>
+// Updated NavLink to use Link
+const NavLink = React.memo(({ to, children }) => (
+  <Link to={to} className="text-sm font-medium hover:text-purple-600 transition-colors">
     {children}
-  </a>
-))
+  </Link>
+));
 
 const FeatureCard = React.memo(({ Icon, title, description }) => (
   <div className="flex flex-col items-center space-y-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md transition-transform hover:scale-105">
@@ -33,28 +35,33 @@ const FeatureCard = React.memo(({ Icon, title, description }) => (
     <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">{title}</h3>
     <p className="text-gray-600 dark:text-gray-300 text-center">{description}</p>
   </div>
-))
+));
 
 export default function BlockShareLanding() {
-  const [account, setAccount] = useState(null)
+  const [account, setAccount] = useState(null);
+  const navigate = useNavigate();
+
+  const handleNavigateToDashboard = () => {
+    navigate('/dashboard'); // Navigate to the dashboard
+  };
 
   const handleSubmit = useCallback((e) => {
-    e.preventDefault()
-    console.log('Form submitted')
-  }, [])
+    e.preventDefault();
+    console.log('Form submitted');
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       <header className="px-4 lg:px-6 h-16 flex items-center bg-white dark:bg-gray-800 shadow-sm">
-        <a className="flex items-center justify-center" href="#" aria-label="BlockShare Home">
+        <Link className="flex items-center justify-center" to="/" aria-label="BlockShare Home">
           <Box className="h-8 w-8 text-purple-600" aria-hidden="true" />
           <span className="ml-2 text-2xl font-bold text-gray-900 dark:text-gray-100">BlockShare</span>
-        </a>
-        <nav className="ml-auto flex gap-6 sm:gap-8">
-          <NavLink href="#">Dashboard</NavLink>
-          <NavLink href="#">Documents</NavLink>
-          <NavLink href="#">Upload</NavLink>
-          <NavLink href="#">Demo</NavLink>
+        </Link>
+        <nav className="ml-auto flex gap-6 sm:gap-8 font-bold">
+          <button onClick={handleNavigateToDashboard}>Dashboard</button>
+          <button>Documents</button>
+          <button>Documents</button>
+          <button>Documents</button>
         </nav>
       </header>
       <main className="flex-1">
@@ -70,9 +77,7 @@ export default function BlockShareLanding() {
                 </p>
               </div>
               <div className="space-x-4 mt-6">
-                <Button>
-                  Get Started
-                </Button>
+                <Button onClick={handleNavigateToDashboard}>Get Started</Button>
               </div>
             </div>
           </div>
@@ -122,11 +127,11 @@ export default function BlockShareLanding() {
         <div className="container mx-auto px-4 py-6 flex flex-col sm:flex-row justify-between items-center">
           <p className="text-sm text-gray-600 dark:text-gray-400">© {new Date().getFullYear()} BlockShare. All rights reserved.</p>
           <nav className="flex gap-4 sm:gap-6 mt-4 sm:mt-0">
-            <NavLink href="#">Terms of Service</NavLink>
-            <NavLink href="#">Privacy</NavLink>
+            <NavLink to="#">Terms of Service</NavLink>
+            <NavLink to="#">Privacy</NavLink>
           </nav>
         </div>
       </footer>
     </div>
-  )
+  );
 }

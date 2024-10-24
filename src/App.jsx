@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import './App.css'
-import LandingPage from './pages/LandingPage'
 import Dashboard from './pages/Dashboard'
 import BlockShareLanding from './components/BlockShareLanding'
+import Verifier from './components/entities/Verifier'
+import Student from './components/entities/Student'
+import Issuer from './components/entities/Issuer'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
@@ -15,6 +17,9 @@ function App() {
       <Routes> 
         <Route path="/" element={<BlockShareLanding />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
+        <Route path="/verifier" element={<Verifier />} />
+        <Route path="/student" element={<Student />} />
+        <Route path="/issuer" element={<Issuer />} />
       </Routes>
     </Router>
     </>

@@ -60,8 +60,8 @@ export default function BlockShareLanding() {
         <nav className="ml-auto flex gap-6 sm:gap-8 font-bold">
           <button onClick={handleNavigateToDashboard}>Dashboard</button>
           <button>Documents</button>
-          <button>Documents</button>
-          <button>Documents</button>
+          <button>Uploads</button>
+          <button>Demo</button>
         </nav>
       </header>
       <main className="flex-1">
